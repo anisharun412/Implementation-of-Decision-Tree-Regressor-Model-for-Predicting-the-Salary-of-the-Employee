@@ -65,13 +65,16 @@ dt.fit(x_train, y_train)
 
 
 ```python
-x = data[["Position", "Level"]]  # Features
-y = data["Salary"]               # Target
-x_train, x_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.2, random_state=2
-)
-dt = DecisionTreeRegressor()
-dt.fit(x_train, y_train)
+y_pred = dt.predict(x_test)
+mse = metrics.mean_squared_error(y_test, y_pred)
+print("Mean Squared Error:", mse)
+
+r2 = metrics.r2_score(y_test, y_pred)
+print("R2 Score:", r2)
+print("Predicted Salary for [5,6]:", dt.predict([[5, 6]]))
+plt.figure(figsize=(20, 8))
+plot_tree(dt, feature_names=x.columns, filled=True)
+plt.show()
 ```
 
 ## Output:
